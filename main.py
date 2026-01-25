@@ -9,29 +9,34 @@ from cluster import perform_clustering
 data_url = 'datasets/players_20.csv'
 data = load_data(data_url)
 
-# Title
 st.title('FIFA 20 Players Analysis')
 
-# Display basic info
-if st.button('Show Basic Info'):
-    head, info, description = get_basic_info(data)
-    st.write(head)
-    st.write(description)
+# Create tabs for different functionalities
+tab1, tab2, tab3, tab4 = st.tabs(["Basic Info", "Top Nationalities", "Visualizations", "Perform Clustering"])
 
-# Display top nationalities
-if st.button('Top Nationalities'):
-    top_natio = top_nationalities(data)
-    st.write(top_natio)
+# Basic Info Tab
+with tab1:
+    if st.button("Show Basic Info"):
+        head, info, description = get_basic_info(data)
+        st.write(head)
+        st.write(description)
 
-# Show visualizations
-if st.button('Show Rating Distribution'):
-    plot_rating_distribution(data)
+# Top Nationalities Tab
+with tab2:
+    if st.button("Top Nationalities"):
+        top_natio = top_nationalities(data)
+        st.write(top_natio)
 
-if st.button('Show Top Players'):
-    plot_top_players(data)
+# Visualizations Tab
+with tab3:
+    if st.button("Show Rating Distribution"):
+        plot_rating_distribution(data)
+    if st.button("Show Top Players"):
+        plot_top_players(data)
 
-# Clustering interaction
-if st.button('Perform Clustering'):
-    clusters, centers = perform_clustering(data)
-    st.write(f'Clusters: {clusters}')
-    st.write(f'Cluster Centers: {centers}')
+# Clustering Tab
+with tab4:
+    if st.button("Perform Clustering"):
+        clusters, centers = perform_clustering(data)
+        st.write(f'Clusters: {clusters}')
+        st.write(f'Cluster Centers: {centers}')
